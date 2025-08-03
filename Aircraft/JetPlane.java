@@ -1,8 +1,6 @@
 package Aircraft;
 
-
 import java.util.UUID;
-// import Method.WeatherProvider;
 import Method.WeatherTower;
 import Method.ConsoleColor;
 
@@ -61,7 +59,6 @@ public class JetPlane extends Aircraft {
 	@Override
 	public void updateConditions() {
 		WeatherTower tower = new WeatherTower();
-		// System.out.println("JetPlane conditions changed");
 		switch (tower.getWeather(coordinates)) {
 			case "FOG":
 				foggy();
