@@ -16,7 +16,6 @@ public class Flying {
 		Tower tower = new Tower();
 		for (Aircraft air: aircrafts)
 			air.registerTower(tower);
-		System.out.println("");
 		for (int i = 0; i < wcount; i++)
 		{
 			for (Aircraft air: aircrafts)
@@ -26,6 +25,7 @@ public class Flying {
 				air.updateConditions();
 				if (air.checkStatus()) {
 					tower.unregister(air);
+					
 				}
 			}
 		}

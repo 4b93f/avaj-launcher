@@ -1,4 +1,9 @@
-10
+100000
 Baloon B1 2 3 20
-JetPlane J1 23 44 32
-Helicopter H1 654 33 20
+Helicopter H1 2 3 20
+JetPlane J1 2 3 20
+Baloon B2 3 4 20
+Helicopter H2 3 4 20
+JetPlane J2 3 4 20
+Baloon B3 4 5 20
+Helicopter H3 4 5 20

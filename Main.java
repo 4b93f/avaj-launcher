@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.List;
 import Aircraft.Aircraft;
-import Method.Flying;
+import Method.*;
 import Exceptions.*;
 import Exceptions.Error;
 
@@ -29,10 +29,13 @@ public class Main {
 				}
 			}
 			reader.close();
+			FileWriting.alreadyExists();
 			String[] lines = content.split("\n");
 			String weatherCount = lines[0];
 
 			List<Aircraft> aircrafts = Parsing.parseContent(lines);
+			if (aircrafts.isEmpty())
+				throw new ParsingError("No aircrafts found in the file.");
 
 			Flying.fly(weatherCount, aircrafts);
 		}

@@ -2,9 +2,11 @@ package Aircraft;
 
 import java.util.UUID;
 import Method.WeatherTower;
-import Method.ConsoleColor;
+import Method.FileWriting;
 
 public class JetPlane extends Aircraft {
+	String type = "JetPlane";
+
 	public JetPlane(Long p_id, String p_name, Coordinates coordinates) {
 		super(p_id != null ? p_id : UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE,
 			p_name,
@@ -16,7 +18,7 @@ public class JetPlane extends Aircraft {
 		coordinates.setLongitude(coordinates.getLongitude() + SUNNY_CHANGE[0]);
 		coordinates.setLatitude(coordinates.getLatitude() + SUNNY_CHANGE[1]);
 		coordinates.setHeight(coordinates.getHeight() + SUNNY_CHANGE[2]);
-		System.out.println("JetPlane#" + name + "(" + id + ") : SUNBEAMS ! I LOVE THE SUNSHINE!");
+		FileWriting.writeToFile("JetPlane#" + name + "(" + id + ") : SUNBEAMS ! I LOVE THE SUNSHINE!");
 
 	}
 	public void rainy() {
@@ -24,7 +26,7 @@ public class JetPlane extends Aircraft {
 		coordinates.setLongitude(coordinates.getLongitude() + RAIN_CHANGE[0]);
 		coordinates.setLatitude(coordinates.getLatitude() + RAIN_CHANGE[1]);
 		coordinates.setHeight(coordinates.getHeight() + RAIN_CHANGE[2]);
-		System.out.println("JetPlane#" + name + "(" + id + ") : LOOKS LIKE IT'S, RAINING, ARE WE IN BELGIUM ?");
+		FileWriting.writeToFile("JetPlane#" + name + "(" + id + ") : LOOKS LIKE IT'S, RAINING, ARE WE IN BELGIUM ?");
 
 	}
 	public void foggy() {
@@ -32,7 +34,7 @@ public class JetPlane extends Aircraft {
 		coordinates.setLongitude(coordinates.getLongitude() + FOG_CHANGE[0]);
 		coordinates.setLatitude(coordinates.getLatitude() + FOG_CHANGE[1]);
 		coordinates.setHeight(coordinates.getHeight() + FOG_CHANGE[2]);
-		System.out.println("JetPlane#" + name + "(" + id + ") : FOG ? WHO FARTED ?");
+		FileWriting.writeToFile("JetPlane#" + name + "(" + id + ") : FOG ? WHO FARTED ?");
 
 	}
 	public void snowy() {
@@ -40,15 +42,13 @@ public class JetPlane extends Aircraft {
 		coordinates.setLongitude(coordinates.getLongitude() + SNOW_CHANGE[0]);
 		coordinates.setLatitude(coordinates.getLatitude() + SNOW_CHANGE[1]);
 		coordinates.setHeight(coordinates.getHeight() + SNOW_CHANGE[2]);
-		System.out.println("JetPlane#" + name + "(" + id + ") : Snow ? I have no good joke for this.");
+		FileWriting.writeToFile("JetPlane#" + name + "(" + id + ") : Snow ? I have no good joke for this.");
 
 	}
 
 	public boolean checkStatus() {
 		if (coordinates.getHeight() <= 0) {
-			System.out.println(ConsoleColor.RED + "JetPlane has landed." + ConsoleColor.RESET);
-			WeatherTower tower = new WeatherTower();
-			tower.unregister(this);
+			FileWriting.writeToFile("JetPlane has landed.");
 			return true;
 		}
 		if (coordinates.getHeight() > 100)
@@ -90,5 +90,10 @@ public class JetPlane extends Aircraft {
 	@Override
 	public Coordinates getCoordinates() {
 		return this.coordinates;
+	}
+
+	@Override
+	public String getType() {
+		return this.type;
 	}
 }

@@ -2,9 +2,11 @@ package Aircraft;
 
 import java.util.UUID;
 import Method.WeatherTower;
-import Method.ConsoleColor;
+import Method.FileWriting;
 
 public class Helicopter extends Aircraft{
+	String type = "Helicopter";
+
 	public Helicopter(Long p_id, String p_name, Coordinates coordinates) {
 		super(p_id != null ? p_id : UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE,
 			p_name,
@@ -16,7 +18,7 @@ public class Helicopter extends Aircraft{
 		coordinates.setLongitude(coordinates.getLongitude() + SUNNY_CHANGE[0]);
 		coordinates.setLatitude(coordinates.getLatitude() + SUNNY_CHANGE[1]);
 		coordinates.setHeight(coordinates.getHeight() + SUNNY_CHANGE[2]);
-		System.out.println("Helicopter#" + name + "(" + id + ") : IT'S SUNNY, BOND, I'M COMING TO SAVE YOU!");
+		FileWriting.writeToFile("Helicopter#" + name + "(" + id + ") : IT'S SUNNY, BOND, I'M COMING TO SAVE YOU!");
 
 	}
 	public void rainy() {
@@ -24,7 +26,7 @@ public class Helicopter extends Aircraft{
 		coordinates.setLongitude(coordinates.getLongitude() + RAIN_CHANGE[0]);
 		coordinates.setLatitude(coordinates.getLatitude() + RAIN_CHANGE[1]);
 		coordinates.setHeight(coordinates.getHeight() + RAIN_CHANGE[2]);
-		System.out.println("Helicopter#" + name + "(" + id + ") : IT'S RAINING, BUT I'M STILL FLYING!");
+		FileWriting.writeToFile("Helicopter#" + name + "(" + id + ") : IT'S RAINING, BUT I'M STILL FLYING!");
 
 	}
 	public void foggy() {
@@ -32,7 +34,7 @@ public class Helicopter extends Aircraft{
 		coordinates.setLongitude(coordinates.getLongitude() + FOG_CHANGE[0]);
 		coordinates.setLatitude(coordinates.getLatitude() + FOG_CHANGE[1]);
 		coordinates.setHeight(coordinates.getHeight() + FOG_CHANGE[2]);
-		System.out.println("Helicopter#" + name + "(" + id + ") : GOOFY FOGGY, I CAN'T SEE SH*T!");
+		FileWriting.writeToFile("Helicopter#" + name + "(" + id + ") : GOOFY FOGGY, I CAN'T SEE SH*T!");
 
 	}
 	public void snowy() {
@@ -40,13 +42,13 @@ public class Helicopter extends Aircraft{
 		coordinates.setLongitude(coordinates.getLongitude() + SNOW_CHANGE[0]);
 		coordinates.setLatitude(coordinates.getLatitude() + SNOW_CHANGE[1]);
 		coordinates.setHeight(coordinates.getHeight() + SNOW_CHANGE[2]);
-		System.out.println("Helicopter#" + name + "(" + id + ") : ELSA ? JE VOUDRAIS UN BONHOMME DE NEIGE !");
+		FileWriting.writeToFile("Helicopter#" + name + "(" + id + ") : ELSA ? JE VOUDRAIS UN BONHOMME DE NEIGE !");
 
 	}
 
 	public boolean checkStatus() {
 		if (coordinates.getHeight() <= 0) {
-			System.out.println(ConsoleColor.RED + "Helicopter has landed." + ConsoleColor.RESET);
+			FileWriting.writeToFile("Helicopter has landed.");
 			return true;
 		}
 		if (coordinates.getHeight() > 100)
@@ -75,13 +77,23 @@ public class Helicopter extends Aircraft{
 		}
 	}
 
+	@Override
 	public String getName() {
 		return this.name;
 	}
+
+	@Override
 	public Long getId() {
 		return this.id;
 	}
+
+	@Override
 	public Coordinates getCoordinates() {
 		return this.coordinates;
+	}
+
+	@Override
+	public String getType() {
+		return this.type;
 	}
 }

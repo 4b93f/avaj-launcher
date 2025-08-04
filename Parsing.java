@@ -4,6 +4,7 @@ import java.util.List;
 
 import Aircraft.*;
 import Exceptions.*;
+import Exceptions.Error;
 
 
 
@@ -46,7 +47,10 @@ public class Parsing {
 			throw new ParsingError("Height must be inferior or equal to 100 : Exiting ...");
 			
 		AircraftFactory factory = AircraftFactory.getInstance();
-		
-		return (Aircraft) factory.newAircraft(type, name, coord);
+
+		var aircraft = factory.newAircraft(type, name, coord);
+		if (aircraft == null)
+			Error.quit("Aircraft type not recognized : " + type + " : Exiting ...");
+		return (Aircraft) aircraft;
 	}
 }
